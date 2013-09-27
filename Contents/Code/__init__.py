@@ -93,7 +93,10 @@ def Today(option, values=None):
 				summary = "%s - %s %s" % (awayScore, homeScore, gameStatus)
 			oc.add(VideoClipObject(url=VIDEO_URL % game_id, title=title, summary=summary))
 		else:
-			started = game.xpath('.//div[@class="item watchBtnBox"]/a')[0].text
+			try:
+				started = game.xpath('.//div[@class="item watchBtnBox"]/a')[0].text
+			except:
+				started = game.xpath('.//div[@class="item watchBtnBox"]/span')[0].text
 			if started == "WATCH LIVE":
 				oc.add(VideoClipObject(url=VIDEO_URL % game_id, title=title, summary=started))
 			elif started == "UPCOMING EVENT":
